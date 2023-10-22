@@ -46,12 +46,31 @@ const getAllAnimesFromDB = async (filter) => {
   const nameFilterOptions = {
     name: { $regex: new RegExp(filter, 'i') }
   }
-  const animes = await Anime.find(filter ? nameFilterOptions : {})
+  const animes = await Anime.find(filter ? nameFilterOptions : {}).populate({
+    path: 'fans',
+    model: 'Otaku',
+    select: {
+      _id: true,
+      name: true,
+      surname: true,
+      email: true
+    }
+  })
+
   return animes
 }
 
 const getAnimeByIdFromDB = async (id) => {
-  const anime = await Anime.findById(id)
+  const anime = await Anime.findById(id).populate({
+    path: 'fans',
+    model: 'Otaku',
+    select: {
+      _id: true,
+      name: true,
+      surname: true,
+      email: true
+    }
+  })
   return anime
 }
 
@@ -66,10 +85,21 @@ const deleteAnimeFromDB = async (id) => {
   await Anime.deleteOne({ _id: id })
 }
 
-// const updateAnimeByIdInDB = async (id, payload) => {
-//   const anime = await Anime.findByIdAndUpdate(id, payload, { new: true })
-//   return anime
-// }
+const updateAnimeByIdInDB = async (id, payload) => {
+  const anime = await Anime.findByIdAndUpdate(id, payload, {
+    new: true
+  }).populate({
+    path: 'fans',
+    model: 'Otaku',
+    select: {
+      _id: true,
+      name: true,
+      surname: true,
+      email: true
+    }
+  })
+  return anime
+}
 
 module.exports = {
   cleanAnimeCollections,
@@ -79,5 +109,6 @@ module.exports = {
   getAllAnimesFromDB,
   getAnimeByIdFromDB,
   createAnimeInDB,
-  deleteAnimeFromDB
+  deleteAnimeFromDB,
+  updateAnimeByIdInDB
 }

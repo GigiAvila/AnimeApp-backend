@@ -2,7 +2,8 @@ const {
   getAllOtakusFromDB,
   getOtakuByIdFromDB,
   createOtakuInDB,
-  deleteOtakuFromDB
+  deleteOtakuFromDB,
+  updateOtakuByIdInDB
 } = require('../repositories/otaku.js')
 
 const getAllOtakus = async (req, res) => {
@@ -44,17 +45,24 @@ const deleteOtaku = async (req, res) => {
   }
 }
 
-// const updateOtaku = async (req, res, next) => {
-//   const { id } = req.params
-//   const { name } = req.body
+const updateOtaku = async (req, res) => {
+  const { id } = req.params
+  const { name, surname, country, email, _favoriteAnime } = req.body
 
-//   const student = await updateStudentByIdInDB(id, { name })
-//   res.status(200).json({ data: student })
-// }
+  const otaku = await updateOtakuByIdInDB(id, {
+    name,
+    surname,
+    country,
+    email,
+    _favoriteAnime
+  })
+  res.status(200).json({ data: otaku })
+}
 
 module.exports = {
   getAllOtakus,
   getOtakuById,
   createOtaku,
-  deleteOtaku
+  deleteOtaku,
+  updateOtaku
 }
