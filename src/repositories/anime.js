@@ -42,9 +42,42 @@ const cleanAnimePrivateFields = async () => {
   console.log('>>>>Campos utilitarios de Anime eliminados')
 }
 
+const getAllAnimesFromDB = async (filter) => {
+  const nameFilterOptions = {
+    name: { $regex: new RegExp(filter, 'i') }
+  }
+  const animes = await Anime.find(filter ? nameFilterOptions : {})
+  return animes
+}
+
+const getAnimeByIdFromDB = async (id) => {
+  const anime = await Anime.findById(id)
+  return anime
+}
+
+const createAnimeInDB = async (payload) => {
+  const newAnime = new Anime(payload)
+  await newAnime.save()
+
+  return newAnime
+}
+
+const deleteAnimeFromDB = async (id) => {
+  await Anime.deleteOne({ _id: id })
+}
+
+// const updateAnimeByIdInDB = async (id, payload) => {
+//   const anime = await Anime.findByIdAndUpdate(id, payload, { new: true })
+//   return anime
+// }
+
 module.exports = {
   cleanAnimeCollections,
   saveAnimeDocuments,
   updateFansAnimesInDB,
-  cleanAnimePrivateFields
+  cleanAnimePrivateFields,
+  getAllAnimesFromDB,
+  getAnimeByIdFromDB,
+  createAnimeInDB,
+  deleteAnimeFromDB
 }
