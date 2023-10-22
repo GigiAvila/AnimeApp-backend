@@ -32,19 +32,17 @@ const deleteAnime = async (req, res) => {
   const { id } = req.params
   await deleteAnimeFromDB(id)
 
-  res
-    .status(200)
-    .json({
-      data: `Ok, the anime with de id ${id} has been deleted from data base`
-    })
+  res.status(200).json({
+    data: `Ok, the anime with de id ${id} has been deleted from data base`
+  })
 }
-const updateAnime = async (req, res, next) => {
-  const { id } = req.params
-  const { name } = req.body
+// const updateAnime = async (req, res, next) => {
+//   const { id } = req.params
+//   const { name } = req.body
 
-  const student = await updateStudentByIdInDB(id, { name })
-  res.status(200).json({ data: student })
-}
+//   const student = await updateStudentByIdInDB(id, { name })
+//   res.status(200).json({ data: student })
+// }
 
 module.exports = {
   getAllAnimes,
