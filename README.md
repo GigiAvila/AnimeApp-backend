@@ -40,10 +40,17 @@ Las rutas disponibles en esta API con sus respectivos endpoints son:
 3. `POST /otakus` Crea un nuevo otaku.
 4.  `DELETE /otakus/:id` Borra un otaku de la base seleccionado por su ID.
 
-5. 
+   
 🏯 Endpoints para Animes
-1. `GET /animes`:  Obtiene una lista de todos los animes de la base y además te mostrará los datos más relevantes de los Otakus relacionados (aquellos que hayan seleccionado como su anime favorito)
+1. `GET /animes`:  Obtiene una lista de todos los animes de la base y además te mostrará los datos más relevantes de los Otakus relacionados (aquellos que lo hayan seleccionado como su anime favorito)
 2. `GET /animes/:id` Obtiene un anime en específico de la base a partir de su ID. En este endpoint podrás ver también los datos más relevantes del Otaku que haya declado a éste como su anime favorito. 
 3. `POST /animes` Crea un nuevo anime.
 4. `DELETE /animes/:id` Borra un anime de la base seleccionado por su ID.
 
+
+## Ejemplos
+
+#### Ejemplo de solicitud PUT para editar los datos 
+
+
+#### Ejemplo de una respuesta exitosa 
