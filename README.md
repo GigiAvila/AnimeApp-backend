@@ -34,14 +34,16 @@ En mi caso he utilizado la extensión "Thunder Client" en mi editor de código V
 
 Las rutas disponibles en esta API con sus respectivos endpoints son:
 
+👘 Endpoints para Otakus
+1. `GET /otakus:` Obtiene una lista de todos los otakus de la base y además podrás ver la información básica del anime favorito que hayan declarado (su id y el nombre del anime)
+2.  `GET /otakus/:id` Obtiene un otaku en específico de la base a partir de su ID. En este endpoint también verás la información del ánime favorito del Otaku.
+3. `POST /otakus` Crea un nuevo otaku.
+4.  `DELETE /otakus/:id` Borra un otaku de la base seleccionado por su ID.
+
+5. 
 🏯 Endpoints para Animes
-1. `GET /animes`:  Obtiene una lista de todos los animes de la base.
-2. `GET /animes/:id` Obtiene un anime en específico de la base a partir de su ID.
+1. `GET /animes`:  Obtiene una lista de todos los animes de la base y además te mostrará los datos más relevantes de los Otakus relacionados (aquellos que hayan seleccionado como su anime favorito)
+2. `GET /animes/:id` Obtiene un anime en específico de la base a partir de su ID. En este endpoint podrás ver también los datos más relevantes del Otaku que haya declado a éste como su anime favorito. 
 3. `POST /animes` Crea un nuevo anime.
 4. `DELETE /animes/:id` Borra un anime de la base seleccionado por su ID.
 
-👘 Endpoints para Otakus
-1. `GET /otakus:` Obtiene una lista de todos los otakus de la base.
-2.  `GET /otakus/:id` Obtiene un otaku en específico de la base a partir de su ID.
-3. `POST /otakus` Crea un nuevo otaku.
-4.  `DELETE /otakus/:id` Borra un otaku de la base seleccionado por su ID.
