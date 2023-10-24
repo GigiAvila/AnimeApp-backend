@@ -5,51 +5,66 @@ const {
   deleteAnimeFromDB,
   updateAnimeByIdInDB
 } = require('../repositories/anime.js')
+const { setError } = require('../config/error.js')
 
-const getAllAnimes = async (req, res) => {
-  const { filter } = req.query
-  const animes = await getAllAnimesFromDB(filter)
-  res.status(200).json({ data: animes })
+const getAllAnimes = async (req, res, next) => {
+  try {
+    const { filter } = req.query
+    const animes = await getAllAnimesFromDB(filter)
+    res.status(200).json({ data: animes })
+  } catch (error) {
+    return next(setError(400, "Can't find games"))
+  }
 }
 
-const getAnimeById = async (req, res) => {
-  const { id } = req.params
-  const animes = await getAnimeByIdFromDB(id)
-  res.status(200).json({ data: animes })
+const getAnimeById = async (req, res, next) => {
+  try {
+    const { id } = req.params
+    const animes = await getAnimeByIdFromDB(id)
+    res.status(200).json({ data: animes })
+  } catch (error) {
+    return next(setError(400, "Can't find game"))
+  }
 }
 
-const createAnime = async (req, res) => {
-  const newAnime = await createAnimeInDB({
-    name: req.body.name,
-    author: req.body.author,
-    year: req.body.year,
-    principalCharacter: req.body.principalCharacter,
-    isOngoing: req.body.isOngoing
-  })
-  res.status(201).json({ data: newAnime })
+const createAnime = async (req, res, next) => {
+  try {
+    const newAnime = await createAnimeInDB({
+      name: req.body.name,
+      author: req.body.author,
+      year: req.body.year,
+      principalCharacter: req.body.principalCharacter,
+      isOngoing: req.body.isOngoing,
+      fans: req.body.fans
+    })
+    res.status(201).json({ data: newAnime })
+  } catch (error) {
+    return next(setError(201, "Can't create game"))
+  }
 }
 
 const deleteAnime = async (req, res) => {
-  const { id } = req.params
-  await deleteAnimeFromDB(id)
+  try {
+    const { id } = req.params
+    await deleteAnimeFromDB(id)
 
-  res.status(200).json({
-    data: `Ok, the anime with de id ${id} has been deleted from data base`
-  })
+    res.status(200).json({
+      data: `Ok, the anime with de id ${id} has been deleted from data base`
+    })
+  } catch (error) {
+    return next(setError(201, "Can't delete game"))
+  }
 }
 
 const updateAnime = async (req, res, next) => {
   const { id } = req.params
-  const { name, author, year, principalCharacter, isOngoing } = req.body
 
-  const updatedAnime = await updateAnimeByIdInDB(id, {
-    name,
-    author,
-    year,
-    principalCharacter,
-    isOngoing
-  })
-  res.status(200).json({ data: updatedAnime })
+  try {
+    const updatedAnime = await updateAnimeByIdInDB(id, req.body)
+    res.status(200).json({ data: updatedAnime })
+  } catch (error) {
+    next(setError(400, "Can't update game"))
+  }
 }
 
 module.exports = {

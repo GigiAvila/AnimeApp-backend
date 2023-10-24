@@ -1,5 +1,6 @@
 const seed = require('../seed')
 const Anime = require('../model/anime')
+const Otaku = require('../model/otaku')
 
 const cleanAnimeCollections = async () => {
   await Anime.collection.drop()
@@ -80,25 +81,27 @@ const createAnimeInDB = async (payload) => {
 
   return newAnime
 }
+// si vuelvo a hacer una peticion a todos veo el array de fans vacio
 
 const deleteAnimeFromDB = async (id) => {
   await Anime.deleteOne({ _id: id })
 }
 
 const updateAnimeByIdInDB = async (id, payload) => {
-  const anime = await Anime.findByIdAndUpdate(id, payload, {
+  const oldAnime = await Anime.findById(id)
+  const newAnime = new Anime(payload)
+
+  newAnime._id = id
+
+  if (newAnime.fans) {
+    newAnime.fans = [...oldAnime.fans, ...newAnime.fans]
+  }
+
+  const animeUpdated = await Anime.findByIdAndUpdate(id, newAnime, {
     new: true
-  }).populate({
-    path: 'fans',
-    model: 'Otaku',
-    select: {
-      _id: true,
-      name: true,
-      surname: true,
-      email: true
-    }
   })
-  return anime
+
+  return animeUpdated
 }
 
 module.exports = {

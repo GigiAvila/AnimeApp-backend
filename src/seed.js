@@ -4,6 +4,7 @@ const seed = {
       _animeId: 1,
       name: 'One Piece',
       author: 'Eiichiro Oda',
+      format: ['manga', 'anime'],
       year: 1997,
       principalCharacter: 'Monkey D. Luffy',
       isOngoing: true,
@@ -16,7 +17,8 @@ const seed = {
       year: 1999,
       principalCharacter: 'Naruto Uzumaki',
       isOngoing: false,
-      _fans: [16, 5, 3, 1]
+      _fans: [16, 5, 3, 1],
+      format: ['anime']
     },
     {
       _animeId: 3,
@@ -25,7 +27,8 @@ const seed = {
       year: 2009,
       principalCharacter: 'Eren Yeager',
       isOngoing: false,
-      _fans: [2, 17]
+      _fans: [2, 17],
+      format: ['manga', 'anime']
     },
     {
       _animeId: 4,
@@ -34,7 +37,8 @@ const seed = {
       year: 1984,
       principalCharacter: 'Goku',
       isOngoing: false,
-      _fans: [17, 2]
+      _fans: [17, 2],
+      format: ['manga', 'anime']
     },
     {
       _animeId: 5,
@@ -43,7 +47,8 @@ const seed = {
       year: 2005,
       principalCharacter: 'Thorfinn',
       isOngoing: true,
-      _fans: [14, 4]
+      _fans: [14, 4],
+      format: ['manga', 'anime']
     },
     {
       _animeId: 6,
@@ -52,7 +57,8 @@ const seed = {
       year: 2003,
       principalCharacter: 'Light Yagami',
       isOngoing: false,
-      _fans: [3, 13]
+      _fans: [3, 13],
+      format: ['manga', 'anime']
     },
     {
       _animeId: 7,
@@ -61,7 +67,8 @@ const seed = {
       year: 2014,
       principalCharacter: 'Izuku Midoriya',
       isOngoing: true,
-      _fans: [13]
+      _fans: [13],
+      format: ['manga', 'anime']
     },
     {
       _animeId: 8,
@@ -70,7 +77,8 @@ const seed = {
       year: 1997,
       principalCharacter: 'Ash Ketchum',
       isOngoing: true,
-      _fans: [12]
+      _fans: [12],
+      format: ['anime']
     },
     {
       _animeId: 9,
@@ -79,7 +87,8 @@ const seed = {
       year: 1995,
       principalCharacter: 'Shinji Ikari',
       isOngoing: false,
-      _fans: [6]
+      _fans: [6],
+      format: ['anime']
     },
     {
       _animeId: 10,
@@ -88,7 +97,8 @@ const seed = {
       year: 1997,
       principalCharacter: 'Tai Kamiya',
       isOngoing: true,
-      _fans: []
+      _fans: [],
+      format: ['anime']
     },
     {
       _animeId: 11,
@@ -97,7 +107,8 @@ const seed = {
       year: 2016,
       principalCharacter: 'Tanjiro Kamado',
       isOngoing: false,
-      _fans: [10, 9, 7]
+      _fans: [10, 9, 7],
+      format: ['anime']
     },
     {
       _animeId: 12,
@@ -106,7 +117,8 @@ const seed = {
       year: 1999,
       principalCharacter: 'Yui Kasuga',
       isOngoing: false,
-      _fans: [11]
+      _fans: [11],
+      format: ['anime']
     },
     {
       _animeId: 13,
@@ -115,7 +127,8 @@ const seed = {
       year: 2018,
       principalCharacter: 'Yuji Itadori',
       isOngoing: true,
-      _fans: [1, 2]
+      _fans: [1, 2],
+      format: ['anime']
     },
     {
       _animeId: 14,
@@ -124,7 +137,8 @@ const seed = {
       year: 1996,
       principalCharacter: 'Sakura Kinomoto',
       isOngoing: false,
-      _fans: [8]
+      _fans: [8],
+      format: ['anime']
     },
     {
       _animeId: 15,
@@ -133,7 +147,8 @@ const seed = {
       year: 2016,
       principalCharacter: 'Boruto Uzumaki',
       isOngoing: true,
-      _fans: [7]
+      _fans: [7],
+      format: ['anime']
     }
   ],
   otakus: [

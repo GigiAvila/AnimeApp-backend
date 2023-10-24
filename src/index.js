@@ -4,6 +4,8 @@ const app = express()
 require('./config/db')
 const cors = require('cors')
 const { rateLimit } = require('express-rate-limit')
+const { setError } = require('./config/error')
+const mainRouter = require('./routes/indexRouter')
 
 const {
   cleanAnimeCollections,
@@ -62,18 +64,17 @@ app.use(express.json({ limit: '1mb' }))
 app.use(express.urlencoded({ limit: '1mb', extended: true }))
 
 //Router
-const mainRouter = require('./routes/indexRouter')
 app.use('/api', mainRouter)
 
-// Controlador de rutas no encontradas
+// Error handling
 app.use('*', (req, res, next) => {
-  res.status(404).json({ data: 'Not found' })
+  return next(setError(404, 'Not Found'))
 })
 
-// //Controlador de errores generales del servidor
-app.use((err, req, res, next) => {
-  console.log(' >>>> Server error:', err)
-  res.status(500).json({ data: 'Interval Server Error' })
+app.use((error, req, res, next) => {
+  return res
+    .status(error.status || 500)
+    .json(error.message || 'Internal Server Error')
 })
 
 const PORT = 4001

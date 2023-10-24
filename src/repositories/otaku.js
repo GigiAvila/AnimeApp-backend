@@ -76,7 +76,7 @@ const createOtakuInDB = async (payload) => {
 const deleteOtakuFromDB = async (id) => {
   await Otaku.deleteOne({ _id: id })
 }
-
+// pendiente ver cambiar los campos de favorite anime
 const updateOtakuByIdInDB = async (id, payload) => {
   const anime = await Otaku.findByIdAndUpdate(id, payload, {
     new: true
