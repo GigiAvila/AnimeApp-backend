@@ -6,40 +6,9 @@ const cors = require('cors')
 const { rateLimit } = require('express-rate-limit')
 const { setError } = require('./config/error')
 const mainRouter = require('./routes/indexRouter')
+const seedFunctions = require('./config/seed')
 
-const {
-  cleanAnimeCollections,
-  saveAnimeDocuments,
-  updateFansAnimesInDB,
-  cleanAnimePrivateFields
-} = require('./repositories/anime')
-const {
-  cleanOtakuCollections,
-  saveOtakusDocuments,
-  updateOtakusFavoriteAnimeInDB,
-  cleanOtakuPrivateFields
-} = require('./repositories/otaku')
-
-// CLEAN AND INSERT DOCUMENTS IN COLLECTIONS
-const main = async () => {
-  await cleanAnimeCollections()
-  await cleanOtakuCollections()
-  const { animes } = await saveAnimeDocuments()
-  const { otakus } = await saveOtakusDocuments()
-  await updateFansAnimesInDB(animes, otakus)
-  await updateOtakusFavoriteAnimeInDB(animes, otakus)
-  cleanAnimePrivateFields()
-  cleanOtakuPrivateFields()
-}
-
-main()
-  .then(() => {
-    console.log('Script terminado')
-  })
-  .catch((err) => {
-    console.log('Error lanzando el script!', err)
-    process.exit(1)
-  })
+seedFunctions()
 
 // CORS
 app.use(

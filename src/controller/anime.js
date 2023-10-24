@@ -13,7 +13,7 @@ const getAllAnimes = async (req, res, next) => {
     const animes = await getAllAnimesFromDB(filter)
     res.status(200).json({ data: animes })
   } catch (error) {
-    return next(setError(400, "Can't find games"))
+    return next(setError(400, "Can't find animes"))
   }
 }
 
@@ -23,7 +23,7 @@ const getAnimeById = async (req, res, next) => {
     const animes = await getAnimeByIdFromDB(id)
     res.status(200).json({ data: animes })
   } catch (error) {
-    return next(setError(400, "Can't find game"))
+    return next(setError(400, "Can't find anime"))
   }
 }
 
@@ -39,7 +39,7 @@ const createAnime = async (req, res, next) => {
     })
     res.status(201).json({ data: newAnime })
   } catch (error) {
-    return next(setError(201, "Can't create game"))
+    return next(setError(201, "Can't create anime"))
   }
 }
 
@@ -52,7 +52,7 @@ const deleteAnime = async (req, res) => {
       data: `Ok, the anime with de id ${id} has been deleted from data base`
     })
   } catch (error) {
-    return next(setError(201, "Can't delete game"))
+    return next(setError(201, "Can't delete anime"))
   }
 }
 
@@ -63,7 +63,7 @@ const updateAnime = async (req, res, next) => {
     const updatedAnime = await updateAnimeByIdInDB(id, req.body)
     res.status(200).json({ data: updatedAnime })
   } catch (error) {
-    next(setError(400, "Can't update game"))
+    next(setError(400, "Can't update anime"))
   }
 }
 

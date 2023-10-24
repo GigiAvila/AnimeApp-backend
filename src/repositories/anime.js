@@ -1,4 +1,4 @@
-const seed = require('../seed')
+const seed = require('../seedData')
 const Anime = require('../model/anime')
 const Otaku = require('../model/otaku')
 
@@ -81,7 +81,6 @@ const createAnimeInDB = async (payload) => {
 
   return newAnime
 }
-// si vuelvo a hacer una peticion a todos veo el array de fans vacio
 
 const deleteAnimeFromDB = async (id) => {
   await Anime.deleteOne({ _id: id })
