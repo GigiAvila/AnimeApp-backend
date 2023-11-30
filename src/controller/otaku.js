@@ -3,10 +3,12 @@ const {
   getOtakuByIdFromDB,
   createOtakuInDB,
   deleteOtakuFromDB,
-  updateOtakuByIdInDB
+  updateOtakuByIdInDB,
+  loginOtakuInDB
 } = require('../repositories/otaku.js')
+const { setError } = require('../config/error.js')
 
-const getAllOtakus = async (req, res) => {
+const getAllOtakus = async (req, res, next) => {
   try {
     const { filter } = req.query
     const otakus = await getAllOtakusFromDB(filter)
@@ -16,7 +18,7 @@ const getAllOtakus = async (req, res) => {
   }
 }
 
-const getOtakuById = async (req, res) => {
+const getOtakuById = async (req, res, next) => {
   try {
     const { id } = req.params
     const otakus = await getOtakuByIdFromDB(id)
@@ -26,21 +28,29 @@ const getOtakuById = async (req, res) => {
   }
 }
 
-const createOtaku = async (req, res) => {
+const createOtaku = async (req, res, next) => {
   try {
     const newOtaku = await createOtakuInDB({
       name: req.body.name,
       surname: req.body.surname,
       country: req.body.country,
-      email: req.body.email
+      email: req.body.email,
+      password: req.body.password,
+      premium: req.body.premium,
+      paymentMethod: req.body.paymentMethod,
+      language: req.body.language,
+      avatar:  req.file.path 
+
     })
+    console.log(req.file.path)
     res.status(201).json({ data: newOtaku })
   } catch (error) {
-    return next(setError(201, "Can't create otaku"))
+    console.log(error)
+    return next(setError(400, "Can't create otaku"))
   }
 }
 
-const deleteOtaku = async (req, res) => {
+const deleteOtaku = async (req, res, next) => {
   try {
     const { id } = req.params
     await deleteOtakuFromDB(id)
@@ -53,21 +63,46 @@ const deleteOtaku = async (req, res) => {
   }
 }
 
-const updateOtaku = async (req, res) => {
+const updateOtaku = async (req, res, next) => {
   try {
     const { id } = req.params
-    const { name, surname, country, email, _favoriteAnime } = req.body
+    const { name, surname, country, email, _favoriteManga, paymentMethod, language, premium } = req.body
 
     const otaku = await updateOtakuByIdInDB(id, {
       name,
       surname,
       country,
       email,
-      _favoriteAnime
+      _favoriteManga,
+      paymentMethod,
+      language,
+      premium
     })
     res.status(200).json({ data: otaku })
   } catch (error) {
     next(setError(400, "Can't update otaku"))
+  }
+}
+
+const loginOtaku = async (req, res, next) => {
+  try {
+    const { email, password } = req.body
+
+    const loginData = {
+      email,
+      password
+    }
+
+    const loginRes = await loginOtakuInDB(loginData)
+
+    if (loginRes.success) {
+      res.status(200).json({ data: loginRes.message, token: loginRes.token })
+    } else {
+      res.status(401).json({ error: loginRes.message })
+    }
+  } catch (error) {
+    console.error(error)
+    return next(setError(400, "Can't login"))
   }
 }
 
@@ -76,5 +111,6 @@ module.exports = {
   getOtakuById,
   createOtaku,
   deleteOtaku,
-  updateOtaku
+  updateOtaku,
+  loginOtaku
 }

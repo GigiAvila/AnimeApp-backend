@@ -3,10 +3,12 @@ const express = require('express')
 const app = express()
 require('./config/db')
 const cors = require('cors')
+const nodemailer = require('nodemailer');
 const { rateLimit } = require('express-rate-limit')
 const { setError } = require('./config/error')
 const mainRouter = require('./routes/indexRouter')
 const seedFunctions = require('./config/seed')
+const cloudinary = require('cloudinary').v2
 
 seedFunctions()
 
@@ -27,6 +29,14 @@ const limiter = rateLimit({
   legacyHeaders: false
 })
 app.use(limiter)
+
+//CLOUDINARY
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRET
+})
+
 
 //  MIDDLEWARES DE BODY PARSER
 app.use(express.json({ limit: '1mb' }))

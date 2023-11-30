@@ -1,24 +1,24 @@
 const {
-  cleanAnimeCollections,
-  saveAnimeDocuments,
-  updateFansAnimesInDB,
-  cleanAnimePrivateFields
-} = require('../repositories/anime')
+  cleanMangaCollections,
+  saveMangaDocuments,
+  updateFansMangasInDB,
+  cleanMangaPrivateFields
+} = require('../repositories/manga')
 const {
   cleanOtakuCollections,
   saveOtakusDocuments,
-  updateOtakusFavoriteAnimeInDB,
+  updateOtakusFavoriteMangaInDB,
   cleanOtakuPrivateFields
 } = require('../repositories/otaku')
 
 const seedFunctions = async () => {
-  await cleanAnimeCollections()
+  await cleanMangaCollections()
   await cleanOtakuCollections()
-  const { animes } = await saveAnimeDocuments()
+  const { mangas } = await saveMangaDocuments()
   const { otakus } = await saveOtakusDocuments()
-  await updateFansAnimesInDB(animes, otakus)
-  await updateOtakusFavoriteAnimeInDB(animes, otakus)
-  cleanAnimePrivateFields()
+  await updateFansMangasInDB(mangas, otakus)
+  await updateOtakusFavoriteMangaInDB(mangas, otakus)
+  cleanMangaPrivateFields()
   cleanOtakuPrivateFields()
 }
 

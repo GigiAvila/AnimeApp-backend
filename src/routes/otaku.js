@@ -5,13 +5,17 @@ const {
   getOtakuById,
   createOtaku,
   deleteOtaku,
-  updateOtaku
+  updateOtaku,
+  loginOtaku
 } = require('../controller/otaku')
+const uploadMiddleware = require('../middleware/file')
 
 otakuRouter.get('/', getAllOtakus)
 otakuRouter.get('/:id', getOtakuById)
-otakuRouter.post('/', createOtaku)
-otakuRouter.put('/:id', updateOtaku)
+otakuRouter.post('/',uploadMiddleware.single('avatar'), createOtaku)
+otakuRouter.post('/login', loginOtaku)
+otakuRouter.put('/:id',uploadMiddleware.single('avatar'), updateOtaku)
 otakuRouter.delete('/:id', deleteOtaku)
+
 
 module.exports = otakuRouter
