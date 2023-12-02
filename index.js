@@ -1,13 +1,13 @@
 require('dotenv').config()
 const express = require('express')
 const app = express()
-require('./config/db')
+require('./src/config/db')
 const cors = require('cors')
-const nodemailer = require('nodemailer');
+const nodemailer = require('nodemailer')
 const { rateLimit } = require('express-rate-limit')
-const { setError } = require('./config/error')
-const mainRouter = require('./routes/indexRouter')
-const seedFunctions = require('./config/seed')
+const { setError } = require('./src/config/error')
+const mainRouter = require('./src/routes/indexRouter')
+const seedFunctions = require('./src/config/seed')
 const cloudinary = require('cloudinary').v2
 
 seedFunctions()
@@ -36,7 +36,6 @@ cloudinary.config({
   api_key: process.env.API_KEY,
   api_secret: process.env.API_SECRET
 })
-
 
 //  MIDDLEWARES DE BODY PARSER
 app.use(express.json({ limit: '1mb' }))

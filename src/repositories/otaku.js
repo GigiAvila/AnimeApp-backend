@@ -1,14 +1,13 @@
 const seed = require('../seedData')
 const bcrypt = require('bcrypt')
-const {generateSign} = require('../config/jwt')
+const { generateSign } = require('../config/jwt')
+const { deleteFile } = require('../middleware/deleteFile')
 const Otaku = require('../model/otaku')
 
 const cleanOtakuCollections = async () => {
   await Otaku.collection.drop()
   console.log('>>> Colección Otaku limpia!')
 }
-
-
 
 const saveOtakusDocuments = async () => {
   const otakusWithHashedPass = seed.otakus.map((otaku) => {
@@ -26,7 +25,6 @@ const saveOtakusDocuments = async () => {
     otakus
   }
 }
-
 
 const updateOtakusFavoriteMangaInDB = async (animes, otakus) => {
   await Promise.all(
@@ -81,10 +79,28 @@ const getOtakuByIdFromDB = async (id) => {
   return otaku
 }
 
-const createOtakuInDB = async (payload) => {
-  const newOtaku = new Otaku(payload)
-  await newOtaku.save()
-  return newOtaku
+const registerOtakuInDB = async (payload) => {
+  try {
+    const otakuDuplicate = await Otaku.findOne({ email: payload.email })
+
+    if (!otakuDuplicate) {
+      payload.verifyEmail = true
+
+      const newOtaku = new Otaku(payload)
+      await newOtaku.save()
+
+      return { success: true, message: 'New Otaku is created', otaku: newOtaku }
+    } else {
+      console.log('>>>>> ⛑️This otaku already exists in DB')
+      return { success: false, message: 'This otaku already exists in DB' }
+    }
+  } catch (error) {
+    console.error('Error during otaku registration:', error)
+    return {
+      success: false,
+      message: 'An error occurred during otaku registration'
+    }
+  }
 }
 
 const deleteOtakuFromDB = async (id) => {
@@ -92,38 +108,67 @@ const deleteOtakuFromDB = async (id) => {
 }
 
 const updateOtakuByIdInDB = async (id, payload) => {
-  const manga = await Otaku.findByIdAndUpdate(id, payload, {
-    new: true
-  }).populate({
-    path: '_favoriteManga',
-    model: 'Manga',
-    select: {
-      _id: true,
-      name: true
+  try {
+    console.log(id)
+    console.log(payload)
+    const oldOtaku = await Otaku.findById({ _id: id })
+
+    if (!oldOtaku) {
+      return { success: false, message: 'Otaku not found' }
     }
-  })
-  return manga
+
+    const newOtaku = new Otaku(payload)
+    newOtaku._id = id
+
+    if (newOtaku.avatar && oldOtaku.avatar) {
+      deleteFile(oldOtaku.avatar)
+    }
+    const updatedOtaku = await Otaku.findByIdAndUpdate(id, newOtaku, {
+      new: true
+    }).populate({
+      path: '_favoriteManga',
+      model: 'Manga',
+      select: {
+        _id: true,
+        name: true
+      }
+    })
+
+    return { success: true, message: 'Otaku is updated...', updatedOtaku }
+  } catch (error) {
+    console.error('Error during updating otaku... ', error)
+    return {
+      success: false,
+      message: 'An error occurred during updating otaku'
+    }
+  }
 }
 
 const loginOtakuInDB = async (payload) => {
-  const otaku = await Otaku.findOne({ email: payload.email.toLowerCase() });
+  try {
+    const user = await Otaku.findOne({ email: payload.email })
 
-  if (!otaku) {
-    console.log('>>>>> ⛑️this Otaku does not exist in DB');
-    return { success: false, message: 'Otaku does not exist' };
+    if (!user) {
+      console.log(`>>>>> the otaku ${user} does not exist in DB`)
+      return { success: false, message: 'Otaku does not exist' }
+    }
+
+    if (bcrypt.compareSync(payload.password, user.password)) {
+      const token = generateSign(user._id)
+      console.log('>>>> otaku is now log in')
+      return { success: true, message: ' otaku is now logged in', token }
+    } else {
+      console.log('>>>> Passwords do not match')
+      return { success: false, message: 'Passwords do not match' }
+    }
+  } catch (error) {
+    console.error('Error in loginOtakuInDB:', error)
+    return {
+      success: false,
+      message: 'An error occurred during authentication'
+    }
   }
-
-  if (bcrypt.compareSync(payload.password, otaku.password)) {
-    const token = generateSign(otaku._id);
-    console.log('>>>> Otaku is now logged in');
-    return { success: true, message: 'Otaku is now logged in', token };
-  } else {
-    console.log('>>>> ⛑️ Passwords do not match');
-    return { success: false, message: 'Passwords do not match' };
-  }
-};
-
-
+}
 
 module.exports = {
   cleanOtakuCollections,
@@ -132,8 +177,8 @@ module.exports = {
   cleanOtakuPrivateFields,
   getAllOtakusFromDB,
   getOtakuByIdFromDB,
-  createOtakuInDB,
   deleteOtakuFromDB,
   updateOtakuByIdInDB,
   loginOtakuInDB,
+  registerOtakuInDB
 }

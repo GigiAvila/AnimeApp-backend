@@ -1,12 +1,13 @@
 const {
   getAllOtakusFromDB,
   getOtakuByIdFromDB,
-  createOtakuInDB,
   deleteOtakuFromDB,
   updateOtakuByIdInDB,
-  loginOtakuInDB
+  loginOtakuInDB,
+  registerOtakuInDB
 } = require('../repositories/otaku.js')
 const { setError } = require('../config/error.js')
+const bcrypt = require('bcrypt')
 
 const getAllOtakus = async (req, res, next) => {
   try {
@@ -28,22 +29,46 @@ const getOtakuById = async (req, res, next) => {
   }
 }
 
-const createOtaku = async (req, res, next) => {
+const registerOtaku = async (req, res, next) => {
   try {
-    const newOtaku = await createOtakuInDB({
-      name: req.body.name,
-      surname: req.body.surname,
-      country: req.body.country,
-      email: req.body.email,
-      password: req.body.password,
-      premium: req.body.premium,
-      paymentMethod: req.body.paymentMethod,
-      language: req.body.language,
-      avatar:  req.file.path 
+    const {
+      name,
+      surname,
+      country,
+      email,
+      language,
+      password,
+      premium,
+      paymentMethod
+    } = req.body
 
-    })
-    console.log(req.file.path)
-    res.status(201).json({ data: newOtaku })
+    if (!password) {
+      return next(setError(400, 'Password is required'))
+    }
+
+    const hashedPassword = bcrypt.hashSync(password, 10)
+
+    const avatar = req.file ? req.file.path : undefined
+
+    const registerData = {
+      name,
+      surname,
+      country,
+      email,
+      language,
+      password: hashedPassword,
+      avatar,
+      premium,
+      paymentMethod
+    }
+
+    const registerRes = await registerOtakuInDB(registerData)
+
+    if (registerRes.success) {
+      res.status(201).json({ data: registerRes })
+    } else {
+      res.status(401).json(registerRes)
+    }
   } catch (error) {
     console.log(error)
     return next(setError(400, "Can't create otaku"))
@@ -66,9 +91,7 @@ const deleteOtaku = async (req, res, next) => {
 const updateOtaku = async (req, res, next) => {
   try {
     const { id } = req.params
-    const { name, surname, country, email, _favoriteManga, paymentMethod, language, premium } = req.body
-
-    const otaku = await updateOtakuByIdInDB(id, {
+    const {
       name,
       surname,
       country,
@@ -77,9 +100,29 @@ const updateOtaku = async (req, res, next) => {
       paymentMethod,
       language,
       premium
-    })
-    res.status(200).json({ data: otaku })
+    } = req.body
+    const avatar = req.file ? req.file.path : undefined
+
+    const updatedData = {
+      name,
+      surname,
+      country,
+      email,
+      _favoriteManga,
+      paymentMethod,
+      language,
+      premium,
+      avatar
+    }
+
+    const updateRes = await updateOtakuByIdInDB(id, updatedData)
+    if (updateRes.success) {
+      res.status(200).json({ data: updatedData })
+    } else {
+      res.status(400).json(updateRes)
+    }
   } catch (error) {
+    console.log(error)
     next(setError(400, "Can't update otaku"))
   }
 }
@@ -96,9 +139,9 @@ const loginOtaku = async (req, res, next) => {
     const loginRes = await loginOtakuInDB(loginData)
 
     if (loginRes.success) {
-      res.status(200).json({ data: loginRes.message, token: loginRes.token })
+      res.status(200).json(loginRes)
     } else {
-      res.status(401).json({ error: loginRes.message })
+      res.status(401).json(loginRes)
     }
   } catch (error) {
     console.error(error)
@@ -109,8 +152,8 @@ const loginOtaku = async (req, res, next) => {
 module.exports = {
   getAllOtakus,
   getOtakuById,
-  createOtaku,
   deleteOtaku,
   updateOtaku,
-  loginOtaku
+  loginOtaku,
+  registerOtaku
 }

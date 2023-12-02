@@ -1,4 +1,4 @@
-const EMAILTEMPLATE = (name) => `
+const EMAILTEMPLATE = (name, id) => `
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,12 +35,12 @@ const EMAILTEMPLATE = (name) => `
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            text-decoration: none; /* Eliminar subrayado de enlace */
+            text-decoration: none; 
             display: inline-block;
         }
         a {
-            color: white; /* Color del texto del enlace */
-            text-decoration: none; /* Eliminar subrayado de enlace */
+            color: white; 
+            text-decoration: none; 
         }
 
         img {
@@ -56,12 +56,12 @@ const EMAILTEMPLATE = (name) => `
         <img src="https://media.giphy.com/media/FIZ1QC610AAhi/giphy.gif" alt="Animated GIF">
 
         <p>Thank you for creating an account with AnimeApp. Please click the button below to confirm your account:</p>
-        <a href="http://localhost:5173/" target="_blank">
+        <a href="http://localhost:5173/verifyAccount" target="_blank">
             <button>Confirm Account</button>
         </a>
     </div>
 </body>
 </html>
-`;
+`
 
-module.exports = { EMAILTEMPLATE };
+module.exports = { EMAILTEMPLATE }
