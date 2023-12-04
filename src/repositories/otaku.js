@@ -107,25 +107,26 @@ const deleteOtakuFromDB = async (id) => {
   await Otaku.deleteOne({ _id: id })
 }
 
-const updateOtakuByIdInDB = async (id, payload) => {
+const updateOtakuByEmailInDB = async (email, payload) => {
   try {
-    console.log(id)
-    console.log(payload)
-    const oldOtaku = await Otaku.findById({ _id: id })
+    console.log('email', email)
+    console.log('payload', payload)
+    const oldOtaku = await Otaku.findOne({ email: email })
 
     if (!oldOtaku) {
       return { success: false, message: 'Otaku not found' }
     }
 
     const newOtaku = new Otaku(payload)
-    newOtaku._id = id
+    newOtaku._id = oldOtaku._id
 
     if (newOtaku.avatar && oldOtaku.avatar) {
       deleteFile(oldOtaku.avatar)
     }
-    const updatedOtaku = await Otaku.findByIdAndUpdate(id, newOtaku, {
-      new: true
-    }).populate({
+    const updatedOtaku = await Otaku.updateOne(
+      { email: email },
+      { $set: newOtaku }
+    ).populate({
       path: '_favoriteManga',
       model: 'Manga',
       select: {
@@ -170,6 +171,62 @@ const loginOtakuInDB = async (payload) => {
   }
 }
 
+const changePasswordInDB = async (
+  email,
+  currentPassword,
+  newPassword,
+  confirmPassword
+) => {
+  try {
+    currentPassword = String(currentPassword)
+    newPassword = String(newPassword)
+    confirmPassword = String(confirmPassword)
+
+    if (currentPassword === newPassword) {
+      return {
+        success: false,
+        message: 'Sorry, the new password has to be different from before'
+      }
+    }
+
+    if (newPassword !== confirmPassword) {
+      return {
+        success: false,
+        message: 'New password does not match'
+      }
+    }
+
+    const otaku = await Otaku.findOne({ email })
+    console.log(otaku)
+
+    if (!otaku) {
+      return { success: false, message: 'Otaku not found' }
+    }
+
+    if (!bcrypt.compareSync(currentPassword, otaku.password)) {
+      return { success: false, message: 'Current password is incorrect' }
+    }
+
+    const hashedNewPassword = bcrypt.hashSync(newPassword, 10)
+
+    const updateRes = await updateOtakuByEmailInDB(email, {
+      password: hashedNewPassword
+    })
+
+    if (updateRes.success) {
+      return { success: true, message: 'Password updated successfully' }
+    } else {
+      return { success: false, message: 'Failed to update password' }
+    }
+  } catch (error) {
+    console.error('Error during password change: ', error)
+    return {
+      success: false,
+      message: 'An error occurred during password change'
+    }
+  }
+}
+
 module.exports = {
   cleanOtakuCollections,
   saveOtakusDocuments,
@@ -178,7 +235,8 @@ module.exports = {
   getAllOtakusFromDB,
   getOtakuByIdFromDB,
   deleteOtakuFromDB,
-  updateOtakuByIdInDB,
+  updateOtakuByEmailInDB,
   loginOtakuInDB,
-  registerOtakuInDB
+  registerOtakuInDB,
+  changePasswordInDB
 }

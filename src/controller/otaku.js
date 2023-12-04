@@ -2,9 +2,10 @@ const {
   getAllOtakusFromDB,
   getOtakuByIdFromDB,
   deleteOtakuFromDB,
-  updateOtakuByIdInDB,
+  updateOtakuByEmailInDB,
   loginOtakuInDB,
-  registerOtakuInDB
+  registerOtakuInDB,
+  changePasswordInDB
 } = require('../repositories/otaku.js')
 const { setError } = require('../config/error.js')
 const bcrypt = require('bcrypt')
@@ -90,32 +91,20 @@ const deleteOtaku = async (req, res, next) => {
 
 const updateOtaku = async (req, res, next) => {
   try {
-    const { id } = req.params
-    const {
-      name,
-      surname,
-      country,
-      email,
-      _favoriteManga,
-      paymentMethod,
-      language,
-      premium
-    } = req.body
+    const { email } = req.params
+    const { name, surname, country, language } = req.body
     const avatar = req.file ? req.file.path : undefined
 
     const updatedData = {
       name,
       surname,
       country,
-      email,
-      _favoriteManga,
-      paymentMethod,
       language,
-      premium,
+      email,
       avatar
     }
 
-    const updateRes = await updateOtakuByIdInDB(id, updatedData)
+    const updateRes = await updateOtakuByEmailInDB(email, updatedData)
     if (updateRes.success) {
       res.status(200).json({ data: updatedData })
     } else {
@@ -149,11 +138,35 @@ const loginOtaku = async (req, res, next) => {
   }
 }
 
+const changePassword = async (req, res, next) => {
+  try {
+    const { email } = req.params
+    const { currentPassword, newPassword, confirmPassword } = req.body
+
+    const changePasswordRes = await changePasswordInDB(
+      email,
+      currentPassword,
+      newPassword,
+      confirmPassword
+    )
+
+    if (changePasswordRes.success) {
+      res.status(200).json(changePasswordRes)
+    } else {
+      res.status(400).json(changePasswordRes)
+    }
+  } catch (error) {
+    console.error(error)
+    next(setError(400, "Can't change password"))
+  }
+}
+
 module.exports = {
   getAllOtakus,
   getOtakuById,
   deleteOtaku,
   updateOtaku,
   loginOtaku,
-  registerOtaku
+  registerOtaku,
+  changePassword
 }
