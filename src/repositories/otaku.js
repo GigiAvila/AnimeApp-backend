@@ -1,6 +1,9 @@
 const seed = require('../seedData')
 const bcrypt = require('bcrypt')
-const { generateSign } = require('../config/jwt')
+const {
+  generateSign,
+  generateEmailConfirmationToken
+} = require('../config/jwt')
 const { deleteFile } = require('../middleware/deleteFile')
 const Otaku = require('../model/otaku')
 
@@ -84,10 +87,13 @@ const registerOtakuInDB = async (payload) => {
     const otakuDuplicate = await Otaku.findOne({ email: payload.email })
 
     if (!otakuDuplicate) {
-      payload.verifyEmail = true
+      payload.emailConfirmationToken = generateEmailConfirmationToken(
+        payload.email
+      )
 
       const newOtaku = new Otaku(payload)
       await newOtaku.save()
+      console.log('emailToken', newOtaku.emailConfirmationToken)
 
       return { success: true, message: 'New Otaku is created', otaku: newOtaku }
     } else {

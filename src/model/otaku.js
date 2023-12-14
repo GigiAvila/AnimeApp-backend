@@ -8,6 +8,7 @@ const otakuSchema = new mongoose.Schema(
     country: { type: String, required: false, trim: true },
     email: { type: String, required: true, trim: true },
     password: { type: String, required: false, trim: true },
+    emailConfirmationToken: { type: String, default: '-', required: false },
     verifyEmail: { type: Boolean, required: false, default: false, trim: true },
     premium: { type: Boolean, default: false, required: false },
     paymentMethod: {

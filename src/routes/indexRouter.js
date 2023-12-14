@@ -8,6 +8,6 @@ const confirmationRouter = require('./confirmationAccont')
 indexRouter.use('/mangas', mangaRouter)
 indexRouter.use('/otakus', otakuRouter)
 indexRouter.use('/email', nodemailerRouter)
-indexRouter.use('/auth', confirmationRouter)
+indexRouter.use('/verifyAccount', confirmationRouter)
 
 module.exports = indexRouter

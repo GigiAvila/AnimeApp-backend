@@ -22,7 +22,14 @@ const verifyJwt = (token) => {
   }
 }
 
+const generateEmailConfirmationToken = (email) => {
+  const token = jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: '1d' })
+  console.log('token', token)
+  return token
+}
+
 module.exports = {
   generateSign,
-  verifyJwt
+  verifyJwt,
+  generateEmailConfirmationToken
 }

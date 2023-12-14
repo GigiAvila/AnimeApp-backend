@@ -1,4 +1,4 @@
-const EMAILTEMPLATE = (name, id) => `
+const EMAILTEMPLATE = (name, confirmationLink) => `
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,7 +56,7 @@ const EMAILTEMPLATE = (name, id) => `
         <img src="https://media.giphy.com/media/FIZ1QC610AAhi/giphy.gif" alt="Animated GIF">
 
         <p>Thank you for creating an account with AnimeApp. Please click the button below to confirm your account:</p>
-        <a href="http://localhost:5173/verifyAccount" target="_blank">
+        <a href=${confirmationLink} target="_blank">
             <button>Confirm Account</button>
         </a>
     </div>
