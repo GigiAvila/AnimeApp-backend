@@ -1,19 +1,19 @@
 # AnimeApp
-Se trata de mi segundo proyecto en el 🌐 del backend. En este caso he trabajado con dos modelos de datos relacionados entre si (Animes y Otakus) 🏯 
+Se trata de mi segundo proyecto en el 🌐 del backend. En este caso he trabajado con dos modelos de datos relacionados entre si (Mangas y Otakus) 🏯 
 
 ## Descripción 
-En este proyecto podrás hacer consultas, editar o eliminar elementos tanto del listado de animes como de otakus (fanáticos del manga y la cultura pop japonesa). También podrás crear tus propios elementos para agregarlos a la base. 
+En este proyecto podrás hacer consultas, editar o eliminar elementos tanto del listado de mangas como de otakus (fanáticos del manga y la cultura pop japonesa). También podrás crear tus propios elementos para agregarlos a la base. 
 
 ## Requisitos previos
 Para replicar este proyecto es necesario tener instalado Node.js y haber descargado y configurado MongoDB.
 A continuación deberías escribir el comando npm init -y en tu terminal y a continuación instalar las siguientes dependencias en tu package.json:
 
-`npm i express npm i mongoose  npm i dotenv npm i cors npm i rate-limit `
+`npm i express npm i mongoose  npm i dotenv npm i cors npm i rate-limit npm i nodemailer npm i jsonwebtoken npm i bcrypt`
 
 🔌¡No olvides configurar tus script en tu package.json! 🔌
 
 ```{
- "main": "src/index.js",
+ "main": "index.js",
   "scripts": {
     "start": "node .",
     "dev": "node --watch ."
@@ -43,18 +43,18 @@ Las rutas disponibles en esta API con sus respectivos endpoints son:
 
    
 🏯 Endpoints para Animes
-1. `GET /animes`:  Obtiene una lista de todos los animes de la base y además te mostrará los datos más relevantes de los Otakus relacionados (aquellos que lo hayan seleccionado como su manga favorito)
-2. `GET /animes/:id` Obtiene un manga en específico de la base a partir de su ID. En este endpoint podrás ver también los datos más relevantes del Otaku que haya declado a éste como su manga favorito. 
-3. `POST /animes` Crea un nuevo manga.
-4. `DELETE /animes/:id` Borra un manga de la base seleccionado por su ID.
-5. `PUT /animes/:id`: Edita cualquier campo de un elemento manga  seleccionado por su ID. En este caso también podrás modificar o agregar Otakus que sean _fans de este manga agregando su número de ID.
+1. `GET /mangas`:  Obtiene una lista de todos los animes de la base y además te mostrará los datos más relevantes de los Otakus relacionados (aquellos que lo hayan seleccionado como su manga favorito)
+2. `GET /mangas/:id` Obtiene un manga en específico de la base a partir de su ID. En este endpoint podrás ver también los datos más relevantes del Otaku que haya declado a éste como su manga favorito. 
+3. `POST /mangas` Crea un nuevo manga.
+4. `DELETE /mangas/:id` Borra un manga de la base seleccionado por su ID.
+5. `PUT /mangas/:id`: Edita cualquier campo de un elemento manga  seleccionado por su ID. En este caso también podrás modificar o agregar Otakus que sean _fans de este manga agregando su número de ID.
 
 
 ## Ejemplos
 
 #### Ejemplo de solicitud GET para pedir un Manga por ID : 
 
-Endpoint: `http://localhost:4001/api/animes/653828689d27095aead006cb`
+Endpoint: `http://localhost:4001/api/mangas/653828689d27095aead006cb`
 
 #### Ejemplo de una respuesta exitosa 
 ```{
@@ -85,7 +85,7 @@ Endpoint: `http://localhost:4001/api/animes/653828689d27095aead006cb`
 
 #### Ejemplo de solicitud PUT para editar los campos de un Manga por ID : 
 
-Endpoint: `http://localhost:4001/api/animes/653828689d27095aead006cb`
+Endpoint: `http://localhost:4001/api/mangas/653828689d27095aead006cb`
 
 
 #### Manga original 
