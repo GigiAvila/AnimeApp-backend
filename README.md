@@ -8,7 +8,7 @@ En este proyecto podrás hacer consultas, editar o eliminar elementos tanto del 
 Para replicar este proyecto es necesario tener instalado Node.js y haber descargado y configurado MongoDB.
 A continuación deberías escribir el comando npm init -y en tu terminal y a continuación instalar las siguientes dependencias en tu package.json:
 
-`npm i express npm i mongoose  npm i dotenv npm i cors npm i rate-limit npm i nodemailer npm i jsonwebtoken npm i bcrypt`
+`npm i express npm i mongoose  npm i dotenv npm i cors npm i rate-limit npm i nodemailer npm i jsonwebtoken npm i bcrypt npm i multer  npm i cloudinary npm i multer-storage-cloudinary`
 
 🔌¡No olvides configurar tus script en tu package.json! 🔌
 
