@@ -58,27 +58,29 @@ Endpoint: `http://localhost:4001/api/mangas/653828689d27095aead006cb`
 
 #### Ejemplo de una respuesta exitosa 
 ```{
-      "_id": "653828689d27095aead006cb",
-      "name": "One Piece",
-      "author": "Eiichiro Oda",
-      "format": [
-        "manga",
-        "manga"
-      ],
-      "year": 1997,
-      "principalCharacter": "Monkey D. Luffy",
-      "isOngoing": true,
-      "fans": [
-        {
-          "_id": "653828689d27095aead006ec",
-          "name": "Li Wei",
-          "surname": "Chen",
-          "email": "liwei.chen@example.com"
-        }
-      ],
-      "__v": 0,
-      "createdAt": "2023-10-24T20:26:16.410Z",
-      "updatedAt": "2023-10-24T20:26:16.500Z"
+  "data": {
+    "_id": "65b1046e34aad2261667190f",
+    "name": "One Piece",
+    "author": "Eiichiro Oda",
+    "format": [],
+    "year": 1997,
+    "principalCharacter": "Monkey D. Luffy",
+    "isOngoing": true,
+    "fans": [
+      {
+        "_id": "65b1047034aad22616671930",
+        "name": "Li Wei",
+        "surname": "Chen",
+        "email": "liwei.chen@example.com"
+      }
+    ],
+    "issues": 105,
+    "cover": "https://res.cloudinary.com/dqdyvyknw/image/upload/v1700650307/onepiece_wwptje.jpg",
+    "argument": "Follow the epic journey of Monkey D. Luffy as he sets out to become the Pirate King in a world of adventure, treasure, and powerful foes.",
+    "__v": 0,
+    "createdAt": "2024-01-24T12:37:02.761Z",
+    "updatedAt": "2024-01-24T12:37:05.464Z"
+  }
 }
 ```
 
@@ -91,29 +93,53 @@ Endpoint: `http://localhost:4001/api/mangas/653828689d27095aead006cb`
 #### Manga original 
 
 ``` {
-  "data": {
-    "_id": "653828689d27095aead006cc",
-    "name": "Naruto Shippuden",
-    "author": "Kishimoto 💜",
-    "format": [],
-    "year": 2005,
-    "principalCharacter": "Uchiha Sasuke 👁️️",
-    "isOngoing": false,
-    "fans": [
-      "653828689d27095aead006ea",
-      "653828689d27095aead006df",
-      "653828689d27095aead006dd",
-      "653828689d27095aead006db",
-    ],
-    "__v": 0,
-    "createdAt": "2023-10-24T20:26:16.410Z",
-    "updatedAt": "2023-10-24T20:37:20.477Z"
-  }
+     {
+      "_id": "65b1046e34aad22616671910",
+      "name": "Naruto",
+      "author": "Masashi Kishimoto",
+      "format": [],
+      "year": 1999,
+      "principalCharacter": "Naruto Uzumaki",
+      "isOngoing": false,
+      "fans": [
+        {
+          "_id": "65b1047034aad2261667192e",
+          "name": "Hannah",
+          "surname": "Wilson",
+          "email": "hannah.wilson@example.com"
+        },
+        {
+          "_id": "65b1047034aad22616671923",
+          "name": "Luca",
+          "surname": "Rossi",
+          "email": "luca.rossi@example.com"
+        },
+        {
+          "_id": "65b1047034aad22616671921",
+          "name": "Maria",
+          "surname": "Garcia",
+          "email": "maria.garcia@example.com"
+        },
+        {
+          "_id": "65b1047034aad2261667191f",
+          "name": "John",
+          "surname": "Doe",
+          "email": "john.doe@example.com"
+        }
+      ],
+      "issues": 70,
+      "cover": "https://res.cloudinary.com/dqdyvyknw/image/upload/v1700650307/naruto1_dn7xld.jpg",
+      "argument": "Join Naruto Uzumaki, a young ninja with dreams of becoming the strongest ninja and the leader of his village, as he embarks on a journey of self-discovery, friendship, and overcoming formidable foes.",
+      "__v": 0,
+      "createdAt": "2024-01-24T12:37:02.762Z",
+      "updatedAt": "2024-01-24T12:37:05.464Z"
+    },
 }
 ```
 
 
 #### Ejemplo de una respuesta exitosa 
 
-![image](https://github.com/GigiAvila/AnimeApp/assets/130833110/110f2886-1ceb-48cb-a5da-27eed583aba0)
+![image](https://github.com/GigiAvila/AnimeApp/assets/130833110/74082a83-5ec9-4f59-919b-75559510444f)
+
 
