@@ -8,9 +8,11 @@ const seed = {
       principalCharacter: 'Monkey D. Luffy',
       isOngoing: true,
       _fans: [18],
-      issues: 105,   
-      argument: 'Follow the epic journey of Monkey D. Luffy as he sets out to become the Pirate King in a world of adventure, treasure, and powerful foes.',
-      cover: 'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700650307/onepiece_wwptje.jpg',
+      issues: 105,
+      argument:
+        'Follow the epic journey of Monkey D. Luffy as he sets out to become the Pirate King in a world of adventure, treasure, and powerful foes.',
+      cover:
+        'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700650307/onepiece_wwptje.jpg'
     },
     {
       _mangaId: 2,
@@ -20,9 +22,11 @@ const seed = {
       principalCharacter: 'Naruto Uzumaki',
       isOngoing: false,
       _fans: [16, 5, 3, 1],
-      issues: 70,   
-      argument: 'Join Naruto Uzumaki, a young ninja with dreams of becoming the strongest ninja and the leader of his village, as he embarks on a journey of self-discovery, friendship, and overcoming formidable foes.',
-      cover: 'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700650307/naruto1_dn7xld.jpg',
+      issues: 70,
+      argument:
+        'Join Naruto Uzumaki, a young ninja with dreams of becoming the strongest ninja and the leader of his village, as he embarks on a journey of self-discovery, friendship, and overcoming formidable foes.',
+      cover:
+        'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700650307/naruto1_dn7xld.jpg'
     },
     {
       _mangaId: 3,
@@ -32,21 +36,25 @@ const seed = {
       principalCharacter: 'Eren Yeager',
       isOngoing: false,
       _fans: [2, 17],
-      issues: 34,   
-      argument: 'In a world besieged by giant humanoid creatures known as Titans, follow Eren Yeager and his friends as they strive to uncover the mysteries behind the Titans and protect humanity from imminent danger.',
-      cover: 'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700650308/attackOnTitans_nnutlb.jpg',
+      issues: 34,
+      argument:
+        'In a world besieged by giant humanoid creatures known as Titans, follow Eren Yeager and his friends as they strive to uncover the mysteries behind the Titans and protect humanity from imminent danger.',
+      cover:
+        'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700650308/attackOnTitans_nnutlb.jpg'
     },
     {
       _mangaId: 4,
       name: 'Fullmetal Alchemist',
       author: 'Hiromu Arakawa',
-      year: 2001, 
+      year: 2001,
       principalCharacter: 'Edward Elric',
-      isOngoing: false, 
+      isOngoing: false,
       _fans: [11, 12],
       volumes: 27,
-      argument: 'Follow the journey of the Elric brothers, Edward and Alphonse, as they seek the Philosopher\'s Stone to restore their bodies after a failed alchemical ritual, exploring themes of sacrifice, morality, and the consequences of power.',
-      cover: 'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700650307/fullmetal_yfw4ui.jpg', 
+      argument:
+        "Follow the journey of the Elric brothers, Edward and Alphonse, as they seek the Philosopher's Stone to restore their bodies after a failed alchemical ritual, exploring themes of sacrifice, morality, and the consequences of power.",
+      cover:
+        'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700650307/fullmetal_yfw4ui.jpg'
     },
     {
       _mangaId: 5,
@@ -57,8 +65,10 @@ const seed = {
       isOngoing: true,
       _fans: [14, 4],
       issues: 21,
-      argument: 'Embark on a historical journey with Thorfinn, a young warrior seeking vengeance in the Viking Age, exploring themes of war, morality, and the pursuit of a peaceful land called Vinland.',
-      cover: 'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700650315/vinland_lp8ibx.jpg',   
+      argument:
+        'Embark on a historical journey with Thorfinn, a young warrior seeking vengeance in the Viking Age, exploring themes of war, morality, and the pursuit of a peaceful land called Vinland.',
+      cover:
+        'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700650315/vinland_lp8ibx.jpg'
     },
     {
       _mangaId: 6,
@@ -68,9 +78,11 @@ const seed = {
       principalCharacter: 'Light Yagami',
       isOngoing: false,
       _fans: [3, 13],
-      issues: 12,   
-      argument: 'Enter the world of suspense and intellect as Light Yagami discovers a mysterious notebook with the power to kill anyone. Follow his journey as he tries to create a utopia free from crime.',
-      cover: 'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700650312/deathNote_wfmofe.jpg',
+      issues: 12,
+      argument:
+        'Enter the world of suspense and intellect as Light Yagami discovers a mysterious notebook with the power to kill anyone. Follow his journey as he tries to create a utopia free from crime.',
+      cover:
+        'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700650312/deathNote_wfmofe.jpg'
     },
     {
       _mangaId: 7,
@@ -80,21 +92,25 @@ const seed = {
       principalCharacter: 'Izuku Midoriya',
       isOngoing: true,
       _fans: [13],
-      issues: 35, 
-      argument: 'Experience the world of superheroes and villains in a society where individuals possess unique powers known as "quirks." Follow Izuku Midoriya as he strives to become the greatest hero.',
-      cover: 'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700650311/myHeroAcaemy_l3llox.jpg',  
+      issues: 35,
+      argument:
+        'Experience the world of superheroes and villains in a society where individuals possess unique powers known as "quirks." Follow Izuku Midoriya as he strives to become the greatest hero.',
+      cover:
+        'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700650311/myHeroAcaemy_l3llox.jpg'
     },
     {
       _mangaId: 8,
       name: 'Hunter x Hunter',
       author: 'Yoshihiro Togashi',
-      year: 1998, 
+      year: 1998,
       principalCharacter: 'Gon Freecss',
       isOngoing: true,
       _fans: [5],
       volumes: 37,
-      argument: 'Join Gon Freecss on his quest to become a Hunter and find his long-lost father. Explore a world full of challenges, adventures, and powerful creatures.',
-      cover: 'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700650311/HunterxHunter_uousjs.jpg', 
+      argument:
+        'Join Gon Freecss on his quest to become a Hunter and find his long-lost father. Explore a world full of challenges, adventures, and powerful creatures.',
+      cover:
+        'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700650311/HunterxHunter_uousjs.jpg'
     },
     {
       _mangaId: 9,
@@ -104,9 +120,11 @@ const seed = {
       principalCharacter: 'Shinji Ikari',
       isOngoing: false,
       _fans: [6, 15],
-      issues: 14,   
-      argument: 'Dive into the psychological and mecha world of Neon Genesis Evangelion, where teenagers pilot giant robots to protect Earth from mysterious beings. Explore complex characters and existential themes.',
-      cover: 'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700650311/evangelion_ezrs05.jpg',
+      issues: 14,
+      argument:
+        'Dive into the psychological and mecha world of Neon Genesis Evangelion, where teenagers pilot giant robots to protect Earth from mysterious beings. Explore complex characters and existential themes.',
+      cover:
+        'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700650311/evangelion_ezrs05.jpg'
     },
     {
       _mangaId: 10,
@@ -116,9 +134,11 @@ const seed = {
       principalCharacter: 'Asta',
       isOngoing: true,
       _fans: [10, 9, 7],
-      volumes: 33, 
-      argument: 'Join Asta, a young mage born without magic, as he strives to become the Wizard King in a magical world full of challenges, rivalries, and powerful adversaries.',
-      cover: 'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700650311/blackClover_wwwarv.jpg',
+      volumes: 33,
+      argument:
+        'Join Asta, a young mage born without magic, as he strives to become the Wizard King in a magical world full of challenges, rivalries, and powerful adversaries.',
+      cover:
+        'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700650311/blackClover_wwwarv.jpg'
     },
     {
       _mangaId: 11,
@@ -128,9 +148,11 @@ const seed = {
       principalCharacter: 'Tanjiro Kamado',
       isOngoing: false,
       _fans: [10, 9, 7],
-      issues: 9,   
-      argument: 'Experience the tale of Tanjiro Kamado, a young boy turned demon slayer, as he seeks to avenge his family and protect his sister in a world filled with demons and supernatural threats.',
-      cover: 'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700650308/demonSlayer1_j5kldb.jpg',
+      issues: 9,
+      argument:
+        'Experience the tale of Tanjiro Kamado, a young boy turned demon slayer, as he seeks to avenge his family and protect his sister in a world filled with demons and supernatural threats.',
+      cover:
+        'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700650308/demonSlayer1_j5kldb.jpg'
     },
     {
       _mangaId: 12,
@@ -140,9 +162,11 @@ const seed = {
       principalCharacter: 'Saitama',
       isOngoing: true,
       _fans: [10, 9, 7],
-      volumes: 26, 
-      argument: 'Enter the world of Saitama, a hero who can defeat any opponent with a single punch. Follow his journey as he seeks a worthy challenge and navigates the challenges of hero society.',
-      cover: 'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700650311/onePunch_mxtlsc.jpg',
+      volumes: 26,
+      argument:
+        'Enter the world of Saitama, a hero who can defeat any opponent with a single punch. Follow his journey as he seeks a worthy challenge and navigates the challenges of hero society.',
+      cover:
+        'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700650311/onePunch_mxtlsc.jpg'
     },
     {
       _mangaId: 13,
@@ -152,9 +176,11 @@ const seed = {
       principalCharacter: 'Yuji Itadori',
       isOngoing: true,
       _fans: [1, 2],
-      issues: 25,   
-      argument: 'Follow Yuji Itadori as he enters a world of curses, sorcery, and supernatural battles. With the power of a cursed artifact, he joins a school to fight dangerous curses and protect others.',
-      cover: 'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700650312/jujutsu_gv64rz.jpg',
+      issues: 25,
+      argument:
+        'Follow Yuji Itadori as he enters a world of curses, sorcery, and supernatural battles. With the power of a cursed artifact, he joins a school to fight dangerous curses and protect others.',
+      cover:
+        'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700650312/jujutsu_gv64rz.jpg'
     },
     {
       _mangaId: 14,
@@ -164,9 +190,11 @@ const seed = {
       principalCharacter: 'Sakura Kinomoto',
       isOngoing: false,
       _fans: [8],
-      issues: 12,   
-      argument: 'A magical tale following the adventures of Sakura Kinomoto, a young girl who accidentally releases a set of powerful magical cards and must now retrieve them to prevent disaster.',
-      cover: 'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700650308/sakura_dbl2xp.jpg',
+      issues: 12,
+      argument:
+        'A magical tale following the adventures of Sakura Kinomoto, a young girl who accidentally releases a set of powerful magical cards and must now retrieve them to prevent disaster.',
+      cover:
+        'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700650308/sakura_dbl2xp.jpg'
     },
     {
       _mangaId: 15,
@@ -177,8 +205,10 @@ const seed = {
       isOngoing: true,
       _fans: [7],
       issues: 17,
-      argument: 'Follow the adventures of Boruto Uzumaki, the son of Naruto Uzumaki, as he navigates the challenges of being a young ninja in a technologically advanced Hidden Leaf Village. Discover new threats, friendships, and the legacy of the ninja world.',
-      cover: 'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700650308/boruto_yjlkjp.jpg',   
+      argument:
+        'Follow the adventures of Boruto Uzumaki, the son of Naruto Uzumaki, as he navigates the challenges of being a young ninja in a technologically advanced Hidden Leaf Village. Discover new threats, friendships, and the legacy of the ninja world.',
+      cover:
+        'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700650308/boruto_yjlkjp.jpg'
     }
   ],
   otakus: [
@@ -191,12 +221,10 @@ const seed = {
       password: '1234',
       _userId: 1,
       _favoriteManga: 2,
-      _likes:[],
-      _previousReadings: [],
       premium: false,
-      paymentMethod: 'credit card',
       language: 'english',
-      avatar: 'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700773295/Image_56_tp7var.png'
+      avatar:
+        'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700773295/Image_56_tp7var.png'
     },
     {
       name: 'Alice',
@@ -207,12 +235,10 @@ const seed = {
       password: '1234',
       _userId: 2,
       _favoriteManga: 4,
-      _likes:[],
-      _previousReadings: [],
       premium: true,
-      paymentMethod: 'credit card',
       language: 'english',
-      avatar: 'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700774188/Image_60_svb8xk.png'
+      avatar:
+        'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700774188/Image_60_svb8xk.png'
     },
     {
       name: 'Maria',
@@ -223,12 +249,10 @@ const seed = {
       password: '1234',
       _favoriteManga: 2,
       _userId: 3,
-      _likes:[],
-      _previousReadings: [],
       premium: false,
-      paymentMethod: 'credit card',
       language: 'spanish',
-      avatar: 'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700773082/Image_49_miax6v.png'
+      avatar:
+        'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700773082/Image_49_miax6v.png'
     },
     {
       name: 'Elsa',
@@ -239,12 +263,10 @@ const seed = {
       password: '1234',
       _userId: 4,
       _favoriteManga: 5,
-      _likes:[],
-      _previousReadings: [],
       premium: true,
-      paymentMethod: 'credit card',
       language: 'danish',
-      avatar: 'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700773074/Image_52_uh3o7z.png'
+      avatar:
+        'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700773074/Image_52_uh3o7z.png'
     },
     {
       name: 'Luca',
@@ -254,12 +276,10 @@ const seed = {
       password: '1234',
       _userId: 5,
       _favoriteManga: 2,
-      _likes:[],
-      _previousReadings: [],
       premium: false,
-      paymentMethod: 'credit card',
       language: 'italian',
-      avatar: 'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700773294/Image_55_fqzwvv.png'
+      avatar:
+        'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700773294/Image_55_fqzwvv.png'
     },
     {
       name: 'Michael',
@@ -270,12 +290,10 @@ const seed = {
       password: '1234',
       _userId: 6,
       _favoriteManga: 9,
-      _likes:[],
-      _previousReadings: [],
       premium: true,
-      paymentMethod: 'credit card',
       language: 'english',
-      avatar: 'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700773073/Image_45_fsg9gw.png'
+      avatar:
+        'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700773073/Image_45_fsg9gw.png'
     },
     {
       name: 'Sophie',
@@ -286,12 +304,10 @@ const seed = {
       password: '1234',
       _userId: 7,
       _favoriteManga: 11,
-      _likes:[],
-      _previousReadings: [],
       premium: false,
-      paymentMethod: 'credit card',
       language: 'french',
-      avatar: 'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700773073/Image_41_nydes5.png'
+      avatar:
+        'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700773073/Image_41_nydes5.png'
     },
     {
       name: 'Carlos',
@@ -302,12 +318,10 @@ const seed = {
       password: '1234',
       _userId: 8,
       _favoriteManga: 14,
-      _likes:[],
-      _previousReadings: [],
       premium: true,
-      paymentMethod: 'Paypal',
       language: 'spanish',
-      avatar: 'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700773294/Image_57_hgjedq.png'
+      avatar:
+        'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700773294/Image_57_hgjedq.png'
     },
     {
       name: 'Lara',
@@ -318,12 +332,10 @@ const seed = {
       password: '1234',
       _userId: 9,
       _favoriteManga: 11,
-      _likes:[],
-      _previousReadings: [],
       premium: false,
-      paymentMethod: 'Paypal',
       language: 'spanish',
-      avatar: 'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700773073/Image_43_bh7vks.png'
+      avatar:
+        'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700773073/Image_43_bh7vks.png'
     },
     {
       name: 'Isabella',
@@ -334,12 +346,10 @@ const seed = {
       password: '1234',
       _userId: 10,
       _favoriteManga: 11,
-      _likes:[],
-      _previousReadings: [],
       premium: true,
-      paymentMethod: 'Paypal',
       language: 'italian',
-      avatar: 'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700773995/Image_58_asc4jj.png'
+      avatar:
+        'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700773995/Image_58_asc4jj.png'
     },
     {
       name: 'Emil',
@@ -350,12 +360,10 @@ const seed = {
       password: '1234',
       _userId: 11,
       _favoriteManga: 12,
-      _likes:[],
-      _previousReadings: [],
       premium: false,
-      paymentMethod: 'Paypal',
       language: 'english',
-      avatar: 'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700773073/Image_48_ebxuyl.png'
+      avatar:
+        'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700773073/Image_48_ebxuyl.png'
     },
     {
       name: 'Takashi',
@@ -366,12 +374,10 @@ const seed = {
       password: '1234',
       _userId: 12,
       _favoriteManga: 8,
-      _likes:[],
-      _previousReadings: [],
       premium: true,
-      paymentMethod: 'Paypal',
       language: 'japanese',
-      avatar:'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700773994/Image_59_mbp6zz.png'
+      avatar:
+        'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700773994/Image_59_mbp6zz.png'
     },
     {
       name: 'Olivia',
@@ -382,12 +388,10 @@ const seed = {
       password: '1234',
       _userId: 13,
       _favoriteManga: 7,
-      _likes:[],
-      _previousReadings: [],
       premium: false,
-      paymentMethod: 'Paypal',
       language: 'english',
-      avatar: 'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700774188/Image_61_vy2qlk.png'
+      avatar:
+        'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700774188/Image_61_vy2qlk.png'
     },
     {
       name: 'Matteo',
@@ -398,12 +402,10 @@ const seed = {
       password: '1234',
       _userId: 14,
       _favoriteManga: 5,
-      _likes:[],
-      _previousReadings: [],
       premium: true,
-      paymentMethod: 'Paypal',
       language: 'italian',
-      avatar: 'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700773073/Image_44_qzclzv.png'
+      avatar:
+        'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700773073/Image_44_qzclzv.png'
     },
     {
       name: 'Eva',
@@ -414,12 +416,10 @@ const seed = {
       password: '1234',
       _userId: 15,
       _favoriteManga: 15,
-      _likes:[],
-      _previousReadings: [],
       premium: false,
-      paymentMethod: 'Paypal',
       language: 'corean',
-      avatar: 'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700773074/Image_53_nyuaqe.png'
+      avatar:
+        'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700773074/Image_53_nyuaqe.png'
     },
     {
       name: 'Hannah',
@@ -430,13 +430,10 @@ const seed = {
       password: '1234',
       _userId: 16,
       _favoriteManga: 2,
-      _likes:[],
-      _previousReadings: [],
       premium: true,
-      paymentMethod: 'Paypal',
       language: 'english',
-      avatar: 'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700773073/Image_47_t7dy0z.png'
-      
+      avatar:
+        'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700773073/Image_47_t7dy0z.png'
     },
     {
       name: 'Rajesh',
@@ -447,12 +444,11 @@ const seed = {
       password: '1234',
       _userId: 17,
       _favoriteManga: 4,
-      _likes:[],
-      _previousReadings: [],
       premium: false,
-      paymentMethod: 'debit card',
+
       language: 'hindi',
-      avatar: 'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700773294/Image_54_ytb0pd.png'
+      avatar:
+        'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700773294/Image_54_ytb0pd.png'
     },
     {
       name: 'Li Wei',
@@ -463,12 +459,11 @@ const seed = {
       password: '1234',
       _userId: 18,
       _favoriteManga: 1,
-      _likes:[],
-      _previousReadings: [],
       premium: true,
-      paymentMethod: 'debit card',
+
       language: 'chinese',
-      avatar: 'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700773073/Image_46_uab89s.png'
+      avatar:
+        'https://res.cloudinary.com/dqdyvyknw/image/upload/v1700773073/Image_46_uab89s.png'
     }
   ]
 }

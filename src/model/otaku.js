@@ -11,12 +11,6 @@ const otakuSchema = new mongoose.Schema(
     emailConfirmationToken: { type: String, default: '-', required: false },
     verifyEmail: { type: Boolean, required: false, default: false, trim: true },
     premium: { type: Boolean, default: false, required: false },
-    paymentMethod: {
-      type: String,
-      required: false,
-      enum: ['credit card', 'debit card', 'Paypal'],
-      trim: true
-    },
     language: {
       type: String,
       required: false,
@@ -33,7 +27,21 @@ const otakuSchema = new mongoose.Schema(
       ],
       trim: true
     },
-    avatar: { type: String, required: false, trim: true }
+    avatar: { type: String, required: false, trim: true },
+    previousReadings: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Manga',
+        required: false
+      }
+    ],
+    likes: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Manga',
+        required: false
+      }
+    ]
   },
   {
     timestamps: true,

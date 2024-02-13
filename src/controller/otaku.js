@@ -5,7 +5,11 @@ const {
   updateOtakuByEmailInDB,
   loginOtakuInDB,
   registerOtakuInDB,
-  changePasswordInDB
+  changeEmailInDB,
+  changePasswordInDB,
+  updatePreviousReadingsInDB,
+  removePreviousReadingsInDB,
+  updateOtakusLikesInDB
 } = require('../repositories/otaku.js')
 const { setError } = require('../config/error.js')
 const bcrypt = require('bcrypt')
@@ -32,16 +36,8 @@ const getOtakuById = async (req, res, next) => {
 
 const registerOtaku = async (req, res, next) => {
   try {
-    const {
-      name,
-      surname,
-      country,
-      email,
-      language,
-      password,
-      premium,
-      paymentMethod
-    } = req.body
+    const { name, surname, country, email, language, password, premium } =
+      req.body
 
     if (!password) {
       return next(setError(400, 'Password is required'))
@@ -59,8 +55,7 @@ const registerOtaku = async (req, res, next) => {
       language,
       password: hashedPassword,
       avatar,
-      premium,
-      paymentMethod
+      premium
     }
 
     const registerRes = await registerOtakuInDB(registerData)
@@ -138,6 +133,28 @@ const loginOtaku = async (req, res, next) => {
   }
 }
 
+const changeEmail = async (req, res, next) => {
+  try {
+    const { emailConfirmationToken } = req.params
+    const { newEmail } = req.body
+    console.log('Datos del formulario:', { emailConfirmationToken, newEmail })
+
+    const changeEmailRes = await changeEmailInDB(
+      emailConfirmationToken,
+      newEmail
+    )
+
+    if (changeEmailRes.success) {
+      res.status(200).json(changeEmailRes)
+    } else {
+      res.status(400).json(changeEmailRes)
+    }
+  } catch (error) {
+    console.error(error)
+    next(setError(400, "Can't change email"))
+  }
+}
+
 const changePassword = async (req, res, next) => {
   try {
     const { email } = req.params
@@ -161,6 +178,56 @@ const changePassword = async (req, res, next) => {
   }
 }
 
+const updatePreviousReadings = async (req, res, next) => {
+  try {
+    const { email } = req.params
+    const { previousReadings } = req.body
+
+    const updateRes = await updatePreviousReadingsInDB(email, previousReadings)
+    if (updateRes.success) {
+      res.status(200).json({ data: updateRes })
+    } else {
+      res.status(400).json(updateRes)
+    }
+  } catch (error) {
+    next(setError(400, "Can't update previous readings"))
+  }
+}
+
+const removePreviousReadings = async (req, res, next) => {
+  try {
+    const { email } = req.params
+    const { previousReadings } = req.body
+
+    console.log(previousReadings)
+
+    const removeRes = await removePreviousReadingsInDB(email, previousReadings)
+    if (removeRes.success) {
+      res.status(200).json({ data: removeRes })
+    } else {
+      res.status(400).json(removeRes)
+    }
+  } catch (error) {
+    next(setError(400, "Can't remove reading"))
+  }
+}
+
+const updateLikes = async (req, res, next) => {
+  try {
+    const { email } = req.params
+    const { likes } = req.body
+
+    const updateRes = await updateOtakusLikesInDB(email, likes)
+    if (updateRes.success) {
+      res.status(200).json({ data: updateRes })
+    } else {
+      res.status(400).json(updateRes)
+    }
+  } catch (error) {
+    next(setError(400, "Can't update likes"))
+  }
+}
+
 module.exports = {
   getAllOtakus,
   getOtakuById,
@@ -168,5 +235,9 @@ module.exports = {
   updateOtaku,
   loginOtaku,
   registerOtaku,
-  changePassword
+  changeEmail,
+  changePassword,
+  updatePreviousReadings,
+  removePreviousReadings,
+  updateLikes
 }

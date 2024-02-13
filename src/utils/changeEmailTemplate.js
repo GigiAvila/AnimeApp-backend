@@ -1,4 +1,4 @@
-const EMAILTEMPLATE = (name, confirmationLink) => `
+const CHANGEEMAILTEMPLATE = (name, confirmationLink) => `
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,11 +51,11 @@ const EMAILTEMPLATE = (name, confirmationLink) => `
 </head>
 <body>
     <div class="container">
-        <h1>Account Confirmation</h1>
+        <h1>Email Confirmation</h1>
         <p>Hello ${name},</p>
-        <img src="https://media.giphy.com/media/FIZ1QC610AAhi/giphy.gif" alt="Animated GIF">
        
-        <p>Thank you for creating an account with AnimeApp. Please click the button below to confirm your account:</p>
+        <img src="https://media.giphy.com/media/FIZ1QC610AAhi/giphy.gif" alt="Animated GIF">
+        <p> Please click the button below to confirm your new email:</p>
         <a href=${confirmationLink} target="_blank">
             <button>Confirm Account</button>
         </a>
@@ -64,4 +64,4 @@ const EMAILTEMPLATE = (name, confirmationLink) => `
 </html>
 `
 
-module.exports = { EMAILTEMPLATE }
+module.exports = { CHANGEEMAILTEMPLATE }

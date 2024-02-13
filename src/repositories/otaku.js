@@ -2,7 +2,8 @@ const seed = require('../seedData')
 const bcrypt = require('bcrypt')
 const {
   generateSign,
-  generateEmailConfirmationToken
+  generateEmailConfirmationToken,
+  verifyJwt
 } = require('../config/jwt')
 const { deleteFile } = require('../middleware/deleteFile')
 const Otaku = require('../model/otaku')
@@ -29,17 +30,17 @@ const saveOtakusDocuments = async () => {
   }
 }
 
-const updateOtakusFavoriteMangaInDB = async (animes, otakus) => {
+const updateOtakusFavoriteMangaInDB = async (mangas, otakus) => {
   await Promise.all(
     otakus.map(async (otaku) => {
-      const manga = animes.find(
+      const manga = mangas.find(
         (manga) => manga._mangaId === otaku._favoriteManga
       )
       await otaku.updateOne({ _favoriteManga: manga._id })
     })
   )
 
-  console.log(`>>>> Otakus' favoriteAnime actualizados`)
+  console.log(`>>>> Otakus' favoriteManga actualizados`)
 }
 
 const cleanOtakuPrivateFields = async () => {
@@ -55,6 +56,7 @@ const cleanOtakuPrivateFields = async () => {
 
   console.log('>>>>Campos utilitarios de Otaku eliminados')
 }
+
 const getAllOtakusFromDB = async (filter) => {
   const nameFilterOptions = {
     name: { $regex: new RegExp(filter, 'i') }
@@ -177,6 +179,37 @@ const loginOtakuInDB = async (payload) => {
   }
 }
 
+const changeEmailInDB = async (emailConfirmationToken, newEmail) => {
+  console.log(emailConfirmationToken)
+  console.log(newEmail)
+  try {
+    const decodedToken = verifyJwt(emailConfirmationToken)
+
+    if (!decodedToken) {
+      return { success: false, message: 'Invalid token' }
+    }
+
+    const { email: oldEmail } = decodedToken
+
+    const oldUser = await Otaku.findOne({ email: oldEmail })
+
+    if (!oldUser) {
+      return { success: false, message: 'User not found' }
+    }
+
+    oldUser.email = newEmail
+    await oldUser.save()
+
+    return { success: true, message: 'Email changed successfully' }
+  } catch (error) {
+    console.error('Error during changing email... ', error)
+    return {
+      success: false,
+      message: 'An error occurred during changing email'
+    }
+  }
+}
+
 const changePasswordInDB = async (
   email,
   currentPassword,
@@ -233,6 +266,127 @@ const changePasswordInDB = async (
   }
 }
 
+const updatePreviousReadingsInDB = async (email, payload) => {
+  try {
+    let otaku = await Otaku.findOne({ email: email })
+    console.log(payload)
+
+    if (!otaku) {
+      return { success: false, message: 'Otaku not found' }
+    }
+
+    const prevReadings = otaku.previousReadings.map((reading) =>
+      reading.toString()
+    )
+
+    const newReadings = payload
+      .map((reading) => reading.toString())
+      .filter((reading) => !prevReadings.includes(reading))
+
+    if (newReadings.length > 0) {
+      otaku.previousReadings = [...prevReadings, ...newReadings]
+      otaku.previousReadings = [...new Set(otaku.previousReadings)]
+
+      await otaku.save()
+    }
+
+    otaku = await Otaku.findById(otaku._id).populate({
+      path: 'previousReadings',
+      model: 'Manga',
+      select: {
+        _id: true,
+        name: true
+      }
+    })
+
+    return { success: true, message: 'History updated...', otaku }
+  } catch (error) {
+    console.error('Error updating history... ', error)
+    return {
+      success: false,
+      message: 'An error occurred during updating history'
+    }
+  }
+}
+
+const removePreviousReadingsInDB = async (email, readingIds) => {
+  try {
+    let otaku = await Otaku.findOne({ email })
+
+    if (!otaku) {
+      return { success: false, message: 'Otaku not found' }
+    }
+
+    readingIds.forEach((readingId) => {
+      otaku.previousReadings = otaku.previousReadings.filter(
+        (reading) =>
+          reading &&
+          reading._id &&
+          reading._id.toString() !== readingId.toString()
+      )
+    })
+
+    await otaku.save()
+
+    otaku = await Otaku.findById(otaku._id).populate({
+      path: 'previousReadings',
+      model: 'Manga',
+      select: {
+        _id: true,
+        name: true
+      }
+    })
+
+    return { success: true, message: 'Reading removed...', otaku }
+  } catch (error) {
+    console.error('Error removing previous reading... ', error)
+    return {
+      success: false,
+      message: 'An error occurred during removing reading'
+    }
+  }
+}
+
+const updateOtakusLikesInDB = async (email, payload) => {
+  try {
+    let otaku = await Otaku.findOne({ email: email })
+
+    if (!otaku) {
+      return { success: false, message: 'Otaku not found' }
+    }
+
+    const prevLikes = otaku.likes.map((like) => like.toString())
+
+    const newLikes = payload
+      .map((like) => like.toString())
+      .filter((like) => !prevLikes.includes(like))
+
+    if (newLikes.length > 0) {
+      otaku.likes = [...prevLikes, ...newLikes]
+      otaku.likes = [...new Set(otaku.likes)]
+
+      await otaku.save()
+    }
+
+    otaku = await Otaku.findById(otaku._id).populate({
+      path: 'likes',
+      model: 'Manga',
+      select: {
+        _id: true,
+        name: true
+      }
+    })
+
+    return { success: true, message: 'Likes updated...', otaku }
+  } catch (error) {
+    console.error('Error updating likes... ', error)
+    return {
+      success: false,
+      message: 'An error occurred during updating likes'
+    }
+  }
+}
+
 module.exports = {
   cleanOtakuCollections,
   saveOtakusDocuments,
@@ -244,5 +398,9 @@ module.exports = {
   updateOtakuByEmailInDB,
   loginOtakuInDB,
   registerOtakuInDB,
-  changePasswordInDB
+  changeEmailInDB,
+  changePasswordInDB,
+  updatePreviousReadingsInDB,
+  removePreviousReadingsInDB,
+  updateOtakusLikesInDB
 }
